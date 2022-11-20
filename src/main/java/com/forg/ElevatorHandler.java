@@ -14,14 +14,16 @@ public class ElevatorHandler {
         return elevators.add(elev);
     }
 
-    public Elevator freeElevator() {
+    public Elevator freeElevator(int floor) {
         Elevator returnElevator = null;
+        int currentClosest = Integer.MAX_VALUE;
         for (Elevator elevator : elevators) {
-            if(!elevator.getActive()){
-                returnElevator = elevator;
-                break;
+            int newClosest = Math.abs(elevator.getCurrentFloor()-floor);
+            if(newClosest < currentClosest&&!elevator.getActive()){
+                currentClosest = newClosest;
+                if(!elevator.getActive()||currentClosest == 0) return elevator;
             }
-        }   
+        }
         return returnElevator;
     }
     public Elevator elevatorOnFloor(int floor) {

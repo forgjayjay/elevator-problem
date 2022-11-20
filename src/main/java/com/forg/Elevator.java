@@ -11,6 +11,12 @@ public class Elevator {
 
     public synchronized boolean move(int floor) throws InterruptedException{
         final int difference = Math.abs(floor-currentFloor);
+        // boolean asc = floor - currentFloor > 0;
+        // if(asc){
+        //     final int increment = 1;
+        // } else {
+        //     final int increment = -1;
+        // }
         boolean moving = false;
         if(currentFloor!= floor){
             currentFloor=floor;
