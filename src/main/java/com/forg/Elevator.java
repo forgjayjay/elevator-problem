@@ -10,8 +10,9 @@ public class Elevator {
     Direction currentDirection = Direction.UP;
     ArrayList<Integer> floorQueue = new ArrayList<>();
     int floor;
-    public Elevator(){
-
+    String name;
+    public Elevator(String name){
+        this.name = "Elevator"+name;
     }
 
     public void addToQueue(int floor){
@@ -35,21 +36,20 @@ public class Elevator {
                 try {
                     active = true;
                     int difference = floor-currentFloor;
-                    if(difference>0){
+                    if(difference>=0){
                         currentDirection = Direction.UP;
                         for (int i = 0; i < difference; i++) {
                             Thread.sleep(500);
                             currentFloor++;
-                            System.out.println(currentFloor);
                         }
                     }else {
                         currentDirection = Direction.DOWN;
                         for (int i = Math.abs(difference); i > 0; i--) {
                             Thread.sleep(500);
                             currentFloor--;
-                            System.out.println(currentFloor);
                         }
                     }
+                    Thread.sleep(200);
                     currentFloor = floor;
                     active = false;
                     Thread.sleep(600);
@@ -62,7 +62,6 @@ public class Elevator {
         return moving;
     }
     private void removeFromQueue(){
-        System.out.println(floorQueue);
         try{
                 if(floorQueue.iterator().hasNext()){
                 floorQueue.remove(0);
@@ -102,7 +101,9 @@ public class Elevator {
     //     }
     //     return moving; 
     // }
-
+        public String getName() {
+            return name;
+        }
     public int getCurrentFloor() {
         return currentFloor;
     }
@@ -114,6 +115,10 @@ public class Elevator {
     }
     @Override
     public String toString() {
-        return "[ Active: " + active+ "; Current floor: " + currentFloor + " ]";
+        return "[ Elevator: "+name + "; Active: " + active+ "; Current floor: " + currentFloor + "; " + currentDirection +  " ]";
+    }
+    @Override
+    public boolean equals(Object obj) {
+        return name.equals(((Elevator) obj).getName());
     }
 }
