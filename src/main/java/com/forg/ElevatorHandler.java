@@ -18,7 +18,7 @@ public class ElevatorHandler {
         Elevator returnElevator = null;
         int currentClosest = Integer.MAX_VALUE;
         for (Elevator elevator : elevators) {
-            if(direction==elevator.getCurrentDirection()||!elevator.getActive()){
+            if(!elevator.getActive()||direction==elevator.getCurrentDirection()){
                 if(availableElevators.contains(elevator)==false) 
                     {
                         availableElevators.add(elevator);
@@ -28,6 +28,7 @@ public class ElevatorHandler {
         for (Elevator elevator : availableElevators) {
             int newClosest = Math.abs(elevator.getCurrentFloor()-floor);
             if(newClosest < currentClosest) {
+                currentClosest = newClosest;
                 returnElevator = elevator;
             }
         }

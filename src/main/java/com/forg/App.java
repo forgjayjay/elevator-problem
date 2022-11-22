@@ -30,6 +30,8 @@ public class App
             handler.freeElevator(5, Direction.DOWN);
             Thread.sleep(10000);
             handler.freeElevator(8, Direction.DOWN);
+            handler.freeElevator(2, Direction.UP);
+            handler.freeElevator(6, Direction.UP);
             //elev.addToQueue(5);
             // elev = handler.freeElevator(5, Direction.UP);
             //// elev.addToQueue(5);

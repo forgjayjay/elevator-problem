@@ -25,7 +25,7 @@ public class Elevator {
         boolean moving = false;
         if(active){
             try {
-                Thread.sleep(500*Math.abs(floor-currentFloor)+10);
+                Thread.sleep(500*Math.abs(floor-currentFloor));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
