@@ -31,6 +31,7 @@ public class ElevatorHandler {
                 returnElevator = elevator;
             }
         }
+        System.out.println("available: "+availableElevators);
         availableElevators.clear();
         returnElevator.addToQueue(floor);
         return returnElevator;
