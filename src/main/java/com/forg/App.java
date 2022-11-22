@@ -10,20 +10,37 @@ public class App
             ElevatorHandler.elevators.add(new Elevator());
         }
         try {
-            System.out.println(ElevatorHandler.elevators);
-            
-            handler.freeElevator(2).move(2);
-            System.out.println(ElevatorHandler.elevators);
-            handler.freeElevator(5).move(5);
-            System.out.println(ElevatorHandler.elevators);
-            handler.freeElevator(10).move(10);
-            Thread.sleep(2000);
-            System.out.println(ElevatorHandler.elevators);
-            Thread.sleep(5000);
-            System.out.println(ElevatorHandler.elevators);
-            System.out.println(handler.freeElevator(5).move(5));
-            System.out.println(handler.freeElevator(5));
-            System.out.println(ElevatorHandler.elevators);
+            new Thread(){
+                public void run() {
+                    while(true){
+                        try {
+                            System.out.println(ElevatorHandler.elevators);
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                
+            }.start();
+            Elevator elev;
+            elev = handler.freeElevator(2, Direction.UP);
+            elev.addToQueue(2);
+            elev = handler.freeElevator(10, Direction.UP);
+            elev.addToQueue(10);
+            elev = handler.freeElevator(10, Direction.DOWN);
+            elev.addToQueue(10);
+            // elev = handler.freeElevator(5, Direction.UP);
+            // elev.addToQueue(5);
+            // Thread.sleep(5000);
+            // System.out.println(ElevatorHandler.elevators);
+            // // elev = System.out.println(handler.freeElevator(5, Direction.DOWN).move());
+            // // elev = System.out.println(handler.freeElevator(5, Direction.DOWN));
+            // elev = handler.freeElevator(5, Direction.DOWN);
+            // elev.addToQueue(5);
+            // System.out.println(ElevatorHandler.elevators);
+            // Thread.sleep(2000);
+            // System.out.println(ElevatorHandler.elevators);
         } catch (Exception e) {
             e.printStackTrace();
         }
