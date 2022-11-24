@@ -24,11 +24,7 @@ public class Elevator {
     public boolean move(){
         boolean moving = false;
         if(active){
-            try {
-                Thread.sleep(500*Math.abs(floor-currentFloor));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            return moving;
         }
         new Thread() {
             @Override
@@ -51,7 +47,6 @@ public class Elevator {
                     }
                     Thread.sleep(200);
                     currentFloor = floor;
-                    active = false;
                     Thread.sleep(600);
                     removeFromQueue();
                 } catch (InterruptedException e) {
@@ -62,11 +57,14 @@ public class Elevator {
         return moving;
     }
     private void removeFromQueue(){
+        active = false;
         try{
-                if(floorQueue.iterator().hasNext()){
+            if(floorQueue.iterator().hasNext()){
                 floorQueue.remove(0);
                 this.floor = floorQueue.get(0);
                 move();
+            } else{
+                ElevatorHandler.notifyFreeElevator();
             }
         }catch(IndexOutOfBoundsException e){
 
