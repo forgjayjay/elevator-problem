@@ -1,10 +1,14 @@
 package com.forg;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class ElevatorHandler {
     public static ArrayList<Elevator> elevators = new ArrayList<>();
     public ArrayList<Elevator> availableElevators = new ArrayList<>();
+    public static Map<Integer, Direction> floorQueue = new HashMap<>();
 
     public ElevatorHandler(){
 
@@ -32,6 +36,10 @@ public class ElevatorHandler {
                 returnElevator = elevator;
             }
         }
+        if(availableElevators.isEmpty()){
+            floorQueue.put(floor, direction);
+            return null;
+        }
         System.out.println("available: "+availableElevators);
         availableElevators.clear();
         returnElevator.addToQueue(floor);
@@ -46,5 +54,13 @@ public class ElevatorHandler {
             }
         }   
         return returnElevator;
+    }
+    public static void notifyFreeElevator(){
+        ElevatorHandler handler = new ElevatorHandler();
+        if(!floorQueue.isEmpty()){
+            Entry<Integer, Direction> floor = floorQueue.entrySet().iterator().next();
+            handler.freeElevator(floor.getKey(), floor.getValue());
+        }
+        
     }
 }
