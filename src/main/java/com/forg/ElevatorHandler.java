@@ -38,9 +38,10 @@ public class ElevatorHandler {
         }
         if(availableElevators.isEmpty()){
             floorQueue.put(floor, direction);
+            //System.out.println("queued elevator");
             return null;
         }
-        System.out.println("available: "+availableElevators);
+        //System.out.println("available: "+availableElevators);
         availableElevators.clear();
         returnElevator.addToQueue(floor);
         return returnElevator;
@@ -57,6 +58,7 @@ public class ElevatorHandler {
     }
     public static void notifyFreeElevator(){
         ElevatorHandler handler = new ElevatorHandler();
+        System.out.println(floorQueue);
         if(!floorQueue.isEmpty()){
             Entry<Integer, Direction> floor = floorQueue.entrySet().iterator().next();
             handler.freeElevator(floor.getKey(), floor.getValue());

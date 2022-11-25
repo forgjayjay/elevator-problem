@@ -26,6 +26,7 @@ public class App
             handler.freeElevator(2, Direction.UP);
             //elev.addToQueue(2);
             handler.freeElevator(10, Direction.UP);
+            handler.freeElevator(15, Direction.DOWN);
             //elev.addToQueue(10);
             handler.freeElevator(5, Direction.DOWN);
             Thread.sleep(10000);
