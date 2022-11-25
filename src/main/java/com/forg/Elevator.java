@@ -24,13 +24,15 @@ public class Elevator {
     public boolean move(){
         boolean moving = false;
         if(active){
+            System.out.println(name + " requested to move to floor:  " + floorQueue.get(1) + " but is already active and moving to floor: " + floor);
             return moving;
         }
+        active = true;
         new Thread() {
             @Override
             public void run() {
                 try {
-                    active = true;
+                    System.out.println(name+" is moving to new floor: " + floor);
                     int difference = floor-currentFloor;
                     if(difference>=0){
                         currentDirection = Direction.UP;
@@ -64,10 +66,12 @@ public class Elevator {
                 this.floor = floorQueue.get(0);
                 move();
             } else{
+                System.out.println("Handler notified");
                 ElevatorHandler.notifyFreeElevator();
             }
         }catch(IndexOutOfBoundsException e){
-
+            System.out.println("Handler notified with exception");
+            ElevatorHandler.notifyFreeElevator();
         }
     }
     // public synchronized boolean move(int floor, Direction direction) throws InterruptedException{
