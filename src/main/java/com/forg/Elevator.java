@@ -60,17 +60,19 @@ public class Elevator {
     }
     private void removeFromQueue(){
         active = false;
+        //System.out.println(name+" before check: "+floorQueue);
+        floorQueue.remove(0);
         try{
             if(floorQueue.iterator().hasNext()){
-                floorQueue.remove(0);
+                //System.out.println(name+" after check: "+floorQueue);
                 this.floor = floorQueue.get(0);
                 move();
             } else{
-                System.out.println("Handler notified");
+                //System.out.println("Handler notified: " + name);
                 ElevatorHandler.notifyFreeElevator();
             }
         }catch(IndexOutOfBoundsException e){
-            System.out.println("Handler notified with exception");
+            //System.out.println("Handler notified with exception: " + name);
             ElevatorHandler.notifyFreeElevator();
         }
     }

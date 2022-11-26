@@ -58,7 +58,6 @@ public class ElevatorHandler {
     }
     public static void notifyFreeElevator(){
         ElevatorHandler handler = new ElevatorHandler();
-        System.out.println(floorQueue);
         if(!floorQueue.isEmpty()){
             Entry<Integer, Direction> floor = floorQueue.entrySet().iterator().next();
             handler.freeElevator(floor.getKey(), floor.getValue());
